@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "AgentSerp API",
+    "description": "API for search, extraction, summarization, and AI-powered text generation",
     "license": {
       "name": "MIT"
     },
@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.agentserp.com"
     }
   ],
   "security": [
@@ -19,54 +19,15 @@
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/search": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "Search for information with various retrieval strategies",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Search parameters",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/SearchRequest"
               }
             }
           },
@@ -74,17 +35,17 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Search results",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/SearchResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
@@ -96,28 +57,33 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
+    "/extract": {
+      "post": {
+        "description": "Extract and parse content from a URL",
+        "requestBody": {
+          "description": "URL to extract from",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractRequest"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "Extracted content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractResponse"
+                }
+              }
+            }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
@@ -128,25 +94,307 @@
           }
         }
       }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
+    },
+    "/similar": {
       "post": {
-        "description": "Information about a new plant added to the store",
+        "description": "Find documents similar to a given URL",
         "requestBody": {
-          "description": "Plant added to the store",
+          "description": "URL to find similar content for",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/SimilarRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Similar documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimilarResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crawl": {
+      "post": {
+        "description": "Crawl a website starting from a root URL",
+        "requestBody": {
+          "description": "Crawl parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrawlRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Crawl results link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrawlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/search": {
+      "post": {
+        "description": "Run multiple search queries in bulk",
+        "requestBody": {
+          "description": "List of queries to run",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk search results link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulk/extract": {
+      "post": {
+        "description": "Extract content from multiple URLs in bulk",
+        "requestBody": {
+          "description": "List of URLs to extract from",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkExtractRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk extraction results link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summarize": {
+      "post": {
+        "description": "Generate a summary of a document",
+        "requestBody": {
+          "description": "URL to summarize",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SummarizeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Document summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SummarizeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rerank": {
+      "post": {
+        "description": "Rerank a list of documents based on relevance",
+        "requestBody": {
+          "description": "Documents to rerank",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RerankRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Reranked documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RerankResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classify": {
+      "post": {
+        "description": "Classify texts into predefined labels",
+        "requestBody": {
+          "description": "Texts and labels for classification",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClassifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Classification results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassifyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/completions": {
+      "post": {
+        "description": "Generate chat completions with optional search augmentation",
+        "requestBody": {
+          "description": "Chat messages and parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Chat completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -154,63 +402,850 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "Cost": {
         "type": "object",
+        "description": "Per-request cost information",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "total": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Total dollar cost for serving this request"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
+          "breakdown": {
             "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+            "additionalProperties": {
+              "type": "number",
+              "minimum": 0
+            },
+            "description": "Optional map of operation → incremental cost (e.g. neuralSearch: 0.004)"
           }
+        },
+        "required": [
+          "total"
         ]
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+      "Meta": {
         "type": "object",
+        "description": "Metadata block attached to every response",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "api_version": {
+            "type": "string",
+            "description": "Semantic version string of the API that produced the response"
           },
-          "message": {
-            "type": "string"
+          "processing_ms": {
+            "type": "integer",
+            "description": "Time taken on the server to satisfy the request, in ms"
+          },
+          "tokens_used": {
+            "type": "integer",
+            "description": "Total LLM tokens consumed (prompt+completion)"
+          },
+          "cost": {
+            "$ref": "#/components/schemas/Cost"
+          }
+        },
+        "required": [
+          "api_version"
+        ]
+      },
+      "Document": {
+        "type": "object",
+        "description": "Generic doc object used across endpoints",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Human-readable title of the document"
+          },
+          "url": {
+            "type": "string",
+            "description": "Canonical URL of the document"
+          },
+          "content": {
+            "type": "string",
+            "description": "Snippet or full text, depending on request"
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Relevance score (0-1) where 1 is most relevant"
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Backend-specific key-value pairs (author, publishedDate, etc.)"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ]
+      },
+      "SearchRequest": {
+        "type": "object",
+        "description": "Input contract for POST /search",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural-language search query"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "keyword",
+              "neural"
+            ],
+            "default": "auto",
+            "description": "Retrieval strategy: let backend choose, force keyword, or force embedding"
+          },
+          "depth": {
+            "type": "string",
+            "enum": [
+              "basic",
+              "advanced"
+            ],
+            "default": "basic",
+            "description": "Depth/quality tier; advanced costs more & may run longer"
+          },
+          "topic": {
+            "type": "string",
+            "enum": [
+              "general",
+              "news"
+            ],
+            "default": "general",
+            "description": "Domain-specific retrieval agent"
+          },
+          "max_results": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 10,
+            "description": "Maximum number of results to return"
+          },
+          "add_answer": {
+            "oneOf": [
+              {
+                "type": "boolean",
+                "enum": [
+                  false
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "basic",
+                  "detailed"
+                ]
+              }
+            ],
+            "default": false,
+            "description": "`false` → no answer. `basic` → one-sentence LLM answer. `detailed` → richer"
+          },
+          "include_raw_content": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, include cleaned HTML text in each result"
+          },
+          "include_images": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, also run an image search"
+          },
+          "recency": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "day",
+                  "week",
+                  "month",
+                  "year"
+                ]
+              },
+              {
+                "type": "integer",
+                "minimum": 1
+              }
+            ],
+            "description": "Limit results to this many days in the past or a preset"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/SearchFilters"
+          },
+          "view": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "results",
+                "answer",
+                "images",
+                "embeddings"
+              ]
+            },
+            "default": [
+              "results"
+            ],
+            "description": "Which data blocks to include in the response"
+          },
+          "similar_to": {
+            "type": "string",
+            "format": "uri",
+            "description": "Return docs similar to this URL instead of keyword search"
+          },
+          "stream": {
+            "type": "boolean",
+            "description": "If true, respond with NDJSON streaming"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "ndjson",
+              "csv",
+              "parquet"
+            ],
+            "description": "Serialization format for large/bulk results"
+          },
+          "user_context": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Opaque object echoed for personalization"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "SearchFilters": {
+        "type": "object",
+        "description": "Fine-grained filtering for /search",
+        "properties": {
+          "include_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Restrict results to these hostnames"
+          },
+          "exclude_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Omit any result whose hostname matches"
+          },
+          "include_text": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Require these tokens appear in document body"
+          },
+          "exclude_text": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Reject docs containing these tokens"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "SearchData": {
+        "type": "object",
+        "description": "Payload for /search",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "description": "LLM answer if requested"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "description": "Ordered list of search hits"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "alt": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "description": "Image URL plus alt text"
+            }
+          },
+          "embeddings": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "description": "Vector embeddings in the same order as `results`"
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SearchData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ExtractRequest": {
+        "type": "object",
+        "description": "Input for POST /extract",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Page to fetch & parse"
+          },
+          "include_images": {
+            "type": "boolean",
+            "default": false,
+            "description": "Also list images found in the page"
+          },
+          "depth": {
+            "type": "string",
+            "enum": [
+              "basic",
+              "advanced"
+            ],
+            "default": "basic",
+            "description": "basic = quick readability parse; advanced = table extraction etc."
+          },
+          "stream": {
+            "type": "boolean"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "ndjson",
+              "csv",
+              "parquet"
+            ],
+            "description": "Serialization format for large/bulk results"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "ExtractData": {
+        "type": "object",
+        "description": "Payload for /extract",
+        "properties": {
+          "document": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Document"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "raw_content": {
+                    "type": "string",
+                    "description": "Full raw (markdown) content of the page"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "required": [
+          "document"
+        ]
+      },
+      "ExtractResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ExtractData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SimilarRequest": {
+        "type": "object",
+        "description": "Input for POST /similar",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Anchor URL to match"
+          },
+          "max_results": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 10,
+            "description": "How many neighbors to return"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "SimilarData": {
+        "type": "object",
+        "description": "Payload for /similar",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          }
+        },
+        "required": [
+          "results"
+        ]
+      },
+      "SimilarResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SimilarData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "CrawlRequest": {
+        "type": "object",
+        "description": "Input for POST /crawl (sync version returns presigned link)",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Root URL to spider"
+          },
+          "max_depth": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 2,
+            "description": "Maximum link depth from the root page"
+          },
+          "render_js": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable headless-browser rendering"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "ndjson",
+              "csv",
+              "parquet"
+            ],
+            "default": "ndjson",
+            "description": "Serialization format for large/bulk results"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "CrawlData": {
+        "type": "object",
+        "description": "Payload for /crawl",
+        "properties": {
+          "csv_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Presigned link to a CSV/NDJSON of crawl data"
+          }
+        },
+        "required": [
+          "csv_link"
+        ]
+      },
+      "CrawlResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CrawlData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BulkSearchRequest": {
+        "type": "object",
+        "description": "Input for POST /bulk/search",
+        "properties": {
+          "queries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "List of queries to run"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "ndjson",
+              "csv",
+              "parquet"
+            ],
+            "default": "ndjson",
+            "description": "Serialization format for large/bulk results"
+          }
+        },
+        "required": [
+          "queries"
+        ]
+      },
+      "BulkExtractRequest": {
+        "type": "object",
+        "description": "Input for POST /bulk/extract",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "minItems": 1,
+            "description": "Pages to extract"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "ndjson",
+              "csv",
+              "parquet"
+            ],
+            "default": "ndjson",
+            "description": "Serialization format for large/bulk results"
+          }
+        },
+        "required": [
+          "urls"
+        ]
+      },
+      "BulkData": {
+        "type": "object",
+        "description": "Common bulk response payload",
+        "properties": {
+          "download_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Presigned bulk result file"
+          }
+        },
+        "required": [
+          "download_link"
+        ]
+      },
+      "BulkResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/BulkData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SummarizeRequest": {
+        "type": "object",
+        "description": "Input for POST /summarize",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Document to summarize"
+          },
+          "schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Optional JSON-Schema for structured summary"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "SummarizeData": {
+        "type": "object",
+        "description": "Payload for /summarize",
+        "properties": {
+          "summary": {
+            "description": "Free text or schema-shaped JSON"
+          }
+        },
+        "required": [
+          "summary"
+        ]
+      },
+      "SummarizeResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SummarizeData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "RerankRequest": {
+        "type": "object",
+        "description": "Input for POST /rerank",
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "minItems": 1,
+            "description": "Items to reorder"
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional query to steer ranking"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "llm",
+              "bm25",
+              "hybrid"
+            ],
+            "default": "llm",
+            "description": "Ranking algorithm"
+          }
+        },
+        "required": [
+          "documents"
+        ]
+      },
+      "RerankData": {
+        "type": "object",
+        "description": "Payload for /rerank",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          }
+        },
+        "required": [
+          "results"
+        ]
+      },
+      "RerankResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RerankData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ClassifyRequest": {
+        "type": "object",
+        "description": "Input for POST /classify",
+        "properties": {
+          "texts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Texts to classify"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Candidate labels"
+          }
+        },
+        "required": [
+          "texts",
+          "labels"
+        ]
+      },
+      "ClassifyData": {
+        "type": "object",
+        "description": "Payload for /classify",
+        "properties": {
+          "predictions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "text",
+                "label",
+                "score"
+              ]
+            },
+            "description": "Best label per text with confidence"
+          }
+        },
+        "required": [
+          "predictions"
+        ]
+      },
+      "ClassifyResponse": {
+        "type": "object",
+        "description": "Universal response wrapper",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Echo of client-supplied ID or server-assigned UUID"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClassifyData",
+            "description": "Endpoint-specific payload"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ChatMessage": {
+        "type": "object",
+        "description": "Single chat message",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "system",
+              "user",
+              "assistant",
+              "tool"
+            ],
+            "description": "OpenAI-style chat roles"
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        }
       }
     }
   }
