@@ -24,11 +24,10 @@
           {
             "group": "Essentials",
             "pages": [
-              "essentials/concepts",
+              "essentials/authentication",
               "essentials/making-requests",
               "essentials/responses",
-              "essentials/errors",
-              "essentials/authentication",
+              "essentials/errors"
             ]
           }
         ]
