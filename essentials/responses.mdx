@@ -1,0 +1,59 @@
+---
+title: 'Understanding Responses'
+description: 'How to interpret AgentSerp API responses'
+icon: 'list-check'
+---
+
+## Response Structure
+
+AgentSerp API responses are JSON objects with a consistent structure:
+
+- `request_id`: Unique ID for the request (for debugging/support)
+- `data`: The main payload (results, extracted content, etc.)
+- `meta`: (Optional) Metadata about the request (API version, cost, etc.)
+
+## Example: Search Response
+
+```json
+{
+  "request_id": "req_12345",
+  "data": {
+    "results": [
+      {
+        "title": "OpenAI",
+        "url": "https://openai.com",
+        "content": "OpenAI is an AI research lab..."
+      }
+    ],
+    "answer": "OpenAI is a leading AI research company."
+  },
+  "meta": {
+    "api_version": "1.0.0",
+    "processing_ms": 120
+  }
+}
+```
+
+## Example: Extract Response
+
+```json
+{
+  "request_id": "req_67890",
+  "data": {
+    "document": {
+      "title": "OpenAI",
+      "url": "https://openai.com",
+      "raw_content": "...full page content..."
+    }
+  },
+  "meta": {
+    "api_version": "1.0.0"
+  }
+}
+```
+
+## Key Fields
+- `results`: Array of search hits or extracted documents
+- `answer`: (If present) LLM-generated answer
+- `raw_content`: Full extracted content (for /extract)
+- `meta`: Useful for debugging and tracking usage 

@@ -1,0 +1,46 @@
+---
+title: 'Error Handling'
+description: 'How to interpret and troubleshoot AgentSerp API errors'
+icon: 'circle-xmark'
+---
+
+## Common Error Responses
+
+AgentSerp uses standard HTTP status codes and returns error details in JSON.
+
+### 401 Unauthorized
+```json
+{
+  "error": "Invalid API key"
+}
+```
+- Check your API key and Authorization header.
+
+### 400 Bad Request
+```json
+{
+  "error": "Missing required field: query"
+}
+```
+- Ensure your request body matches the endpoint schema.
+
+### 404 Not Found
+```json
+{
+  "error": "Endpoint not found"
+}
+```
+- Check the URL and HTTP method.
+
+### 500 Internal Server Error
+```json
+{
+  "error": "Unexpected server error. Please try again later."
+}
+```
+- If this persists, contact AgentSerp support with your `request_id`.
+
+## Troubleshooting Tips
+- Double-check endpoint paths and required fields.
+- Always include your API key.
+- Use the `request_id` from error responses when contacting support. 

@@ -1,0 +1,49 @@
+---
+title: 'Core Concepts'
+description: 'Overview of AgentSerp API endpoints and their use cases'
+icon: 'lightbulb'
+---
+
+## AgentSerp API Concepts
+
+AgentSerp provides a suite of endpoints for intelligent information retrieval and processing:
+
+### Search
+- **POST /search**
+- Find relevant documents, web pages, or answers for a natural language query.
+- Use when you want to retrieve information from the web or your indexed data.
+
+### Extract
+- **POST /extract**
+- Extract and parse content from a specific URL.
+- Use to get the full text, images, or structured data from a web page.
+
+### Similar
+- **POST /similar**
+- Find documents similar to a given URL.
+- Use for recommendations or finding related content.
+
+### Bulk Search & Extract
+- **POST /bulk/search**, **POST /bulk/extract**
+- Run multiple searches or extractions in a single request.
+- Use for batch processing or large-scale data collection.
+
+### Summarize
+- **POST /summarize**
+- Generate a summary of a document or web page.
+- Use to get concise insights or overviews.
+
+### Rerank
+- **POST /rerank**
+- Rerank a list of documents based on relevance to a query.
+- Use to improve the order of search results or recommendations.
+
+### Classify
+- **POST /classify**
+- Classify texts into predefined labels.
+- Use for tagging, categorization, or content moderation.
+
+### Chat Completions
+- **POST /chat/completions**
+- Generate conversational responses, optionally with search augmentation.
+- Use to build chatbots, assistants, or conversational interfaces.

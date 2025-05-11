@@ -1,0 +1,29 @@
+---
+title: 'Authentication'
+description: 'How to authenticate with the AgentSerp API'
+icon: 'lock'
+---
+
+## API Key Authentication
+
+All AgentSerp API endpoints require authentication using a Bearer token.
+
+### Obtaining an API Key
+- Log in to your AgentSerp dashboard.
+- Navigate to the API Keys section.
+- Create or copy your API key.
+
+### Using Your API Key
+Include your API key in the `Authorization` header of every request:
+
+```bash
+curl -X POST https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/search \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "openai"}'
+```
+
+### Security Tips
+- **Never share your API key publicly.**
+- Rotate your API keys regularly.
+- If you suspect your key is compromised, revoke it immediately in the dashboard. 

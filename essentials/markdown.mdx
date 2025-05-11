@@ -1,34 +1,34 @@
 ---
 title: 'Markdown Syntax'
-description: 'Text, title, and styling in standard markdown'
+description: 'How to write and style documentation for AgentSerp'
 icon: 'text-size'
 ---
 
 ## Titles
 
-Best used for section headers.
+Use section headers to organize your AgentSerp documentation.
 
 ```md
-## Titles
+## Authentication
+## API Reference
 ```
 
 ### Subtitles
 
-Best use to subsection headers.
+Use for endpoint-specific or feature-specific sections.
 
 ```md
-### Subtitles
+### POST /search
+### Error Handling
 ```
 
 <Tip>
-
 Each **title** and **subtitle** creates an anchor and also shows up on the table of contents on the right.
-
 </Tip>
 
 ## Text Formatting
 
-We support most markdown formatting. Simply add `**`, `_`, or `~` around text to format it.
+Standard markdown formatting is supported. Use `**`, `_`, or `~` for bold, italic, or strikethrough.
 
 | Style         | How to write it   | Result          |
 | ------------- | ----------------- | --------------- |
@@ -36,53 +36,41 @@ We support most markdown formatting. Simply add `**`, `_`, or `~` around text to
 | Italic        | `_italic_`        | _italic_        |
 | Strikethrough | `~strikethrough~` | ~strikethrough~ |
 
-You can combine these. For example, write `**_bold and italic_**` to get **_bold and italic_** text.
+You can combine these. For example, `**_important_**` renders as **_important_**.
 
-You need to use HTML to write superscript and subscript text. That is, add `<sup>` or `<sub>` around your text.
+## Linking to AgentSerp API Docs
 
-| Text Size   | How to write it          | Result                 |
-| ----------- | ------------------------ | ---------------------- |
-| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
-| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
+To link to an endpoint page, use root-relative links:
 
-## Linking to Pages
-
-You can add a link by wrapping text in `[]()`. You would write `[link to google](https://google.com)` to [link to google](https://google.com).
-
-Links to pages in your docs need to be root-relative. Basically, you should include the entire folder path. For example, `[link to text](/writing-content/text)` links to the page "Text" in our components section.
-
-Relative links like `[link to text](../text)` will open slower because we cannot optimize them as easily.
+```md
+[Search Endpoint](/api-reference/endpoint/search)
+```
 
 ## Blockquotes
 
-### Singleline
-
-To create a blockquote, add a `>` in front of a paragraph.
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
+> Use blockquotes to highlight important AgentSerp API usage notes.
 
 ```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
+> Always include your Bearer token in the Authorization header.
 ```
 
-### Multiline
+## Code and API Examples
 
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+Use fenced code blocks for API requests and responses:
 
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+```bash
+curl -X POST https://api.agentserp.com/search \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "openai"}'
 ```
 
-### LaTeX
+## Math and LaTeX
 
-Mintlify supports [LaTeX](https://www.latex-project.org) through the Latex component.
+AgentSerp docs support math and formulas using LaTeX syntax in code blocks or with supported math plugins.
 
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-
-```md
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+```latex
+\text{score} = \frac{\text{relevant results}}{\text{total results}}
 ```
+
+> For advanced math rendering, see the Mintlify documentation on math/LaTeX support.

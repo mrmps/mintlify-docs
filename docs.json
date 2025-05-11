@@ -24,11 +24,10 @@
           {
             "group": "Essentials",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
+              "essentials/concepts",
+              "essentials/making-requests",
+              "essentials/responses",
+              "essentials/errors",
               "essentials/reusable-snippets"
             ]
           }

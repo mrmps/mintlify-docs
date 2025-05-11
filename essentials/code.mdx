@@ -1,37 +1,68 @@
 ---
-title: 'Code Blocks'
-description: 'Display inline code and code blocks'
+title: 'Code Blocks for AgentSerp'
+description: 'How to document and display AgentSerp API requests and responses'
 icon: 'code'
 ---
 
-## Basic
+## Inline Code
 
-### Inline Code
+Use backticks to highlight a parameter, header, or field name in AgentSerp docs, e.g. `Authorization` or `query`.
 
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
+Example:
 
+`Authorization: Bearer <token>`
+
+## API Request Code Blocks
+
+Show how to make requests to AgentSerp endpoints using fenced code blocks and language tags for syntax highlighting.
+
+```bash
+curl -X POST https://api.agentserp.com/search \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "openai"}'
 ```
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
-```
 
-### Code Block
+## JSON Request/Response Examples
 
-Use [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) by enclosing code in three backticks and follow the leading ticks with the programming language of your snippet to get syntax highlighting. Optionally, you can also write the name of your code after the programming language.
+Use `json` for request and response payloads:
 
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+```json
+{
+  "query": "openai"
 }
 ```
 
-````md
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+```json
+{
+  "data": {
+    "results": [
+      { "title": "OpenAI", "url": "https://openai.com" }
+    ]
+  }
 }
 ```
-````
+
+## Error Example
+
+Show error responses for AgentSerp endpoints:
+
+```json
+{
+  "error": "Invalid API key"
+}
+```
+
+## Multi-language Examples
+
+You can provide examples in multiple languages for AgentSerp API usage:
+
+```python
+import requests
+resp = requests.post(
+  'https://api.agentserp.com/search',
+  headers={'Authorization': 'Bearer <token>'},
+  json={'query': 'openai'}
+)
+print(resp.json())
+```

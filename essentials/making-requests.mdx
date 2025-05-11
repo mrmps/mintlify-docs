@@ -1,0 +1,50 @@
+---
+title: 'Making Requests'
+description: 'How to call AgentSerp API endpoints with real examples'
+icon: 'terminal'
+---
+
+## Base URL
+
+All requests should be made to:
+
+```
+https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app
+```
+
+## Required Headers
+- `Authorization: Bearer <your-api-key>`
+- `Content-Type: application/json`
+
+## Example: Search Endpoint
+
+### cURL
+```bash
+curl -X POST https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/search \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "openai"}'
+```
+
+### Python (requests)
+```python
+import requests
+resp = requests.post(
+  'https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/search',
+  headers={
+    'Authorization': 'Bearer <your-api-key>',
+    'Content-Type': 'application/json'
+  },
+  json={"query": "openai"}
+)
+print(resp.json())
+```
+
+## Example: Extract Endpoint
+
+```bash
+curl -X POST https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/extract \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://openai.com"}'
+``` 
