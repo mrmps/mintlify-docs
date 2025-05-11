@@ -46,16 +46,16 @@
           {
             "group": "Endpoints",
             "pages": [
-              "api-reference/endpoints/search",
-              "api-reference/endpoints/extract",
-              "api-reference/endpoints/similar",
-              "api-reference/endpoints/crawl",
-              "api-reference/endpoints/bulk-search",
-              "api-reference/endpoints/bulk-extract",
-              "api-reference/endpoints/summarize",
-              "api-reference/endpoints/rerank",
-              "api-reference/endpoints/classify",
-              "api-reference/endpoints/chat-completions"
+              "api-reference/endpoint/search",
+              "api-reference/endpoint/extract",
+              "api-reference/endpoint/similar",
+              "api-reference/endpoint/crawl",
+              "api-reference/endpoint/bulk-search",
+              "api-reference/endpoint/bulk-extract",
+              "api-reference/endpoint/summarize",
+              "api-reference/endpoint/rerank",
+              "api-reference/endpoint/classify",
+              "api-reference/endpoint/chat-completions"
             ]
           }
         ]
