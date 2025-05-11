@@ -581,8 +581,7 @@
               "enum": [
                 "results",
                 "answer",
-                "images",
-                "embeddings"
+                "images"
               ]
             },
             "default": [
@@ -686,16 +685,6 @@
               ],
               "description": "Image URL plus alt text"
             }
-          },
-          "embeddings": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            "description": "Vector embeddings in the same order as `results`"
           }
         }
       },
@@ -716,6 +705,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -809,6 +799,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -865,6 +856,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -936,6 +928,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -1027,6 +1020,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -1078,6 +1072,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
@@ -1144,6 +1139,7 @@
           }
         },
         "required": [
+          "request_id",
           "data"
         ]
       },
