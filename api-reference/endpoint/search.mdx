@@ -1,0 +1,17 @@
+---
+title: 'Search'
+openapi: 'POST /search'
+---
+
+Search for information with various retrieval strategies.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/search \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "openai"}'
+``` 

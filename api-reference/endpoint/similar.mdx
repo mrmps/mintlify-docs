@@ -1,0 +1,17 @@
+---
+title: 'Similar'
+openapi: 'POST /similar'
+---
+
+Find documents similar to a given URL.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/similar \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://openai.com"}'
+``` 

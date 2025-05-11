@@ -1,0 +1,17 @@
+---
+title: 'Crawl'
+openapi: 'POST /crawl'
+---
+
+Crawl a website starting from a root URL.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/crawl \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://openai.com"}'
+``` 

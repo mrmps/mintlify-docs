@@ -44,12 +44,18 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Endpoints",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/search",
+              "api-reference/endpoint/extract",
+              "api-reference/endpoint/similar",
+              "api-reference/endpoint/crawl",
+              "api-reference/endpoint/bulk-search",
+              "api-reference/endpoint/bulk-extract",
+              "api-reference/endpoint/summarize",
+              "api-reference/endpoint/rerank",
+              "api-reference/endpoint/classify",
+              "api-reference/endpoint/chat-completions"
             ]
           }
         ]

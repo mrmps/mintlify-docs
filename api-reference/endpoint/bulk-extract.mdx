@@ -1,0 +1,17 @@
+---
+title: 'Bulk Extract'
+openapi: 'POST /bulk/extract'
+---
+
+Extract content from multiple URLs in bulk.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/bulk/extract \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"urls": ["https://openai.com", "https://example.com"]}'
+``` 

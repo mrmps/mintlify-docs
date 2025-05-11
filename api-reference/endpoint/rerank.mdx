@@ -1,0 +1,17 @@
+---
+title: 'Rerank'
+openapi: 'POST /rerank'
+---
+
+Rerank a list of documents based on relevance.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/rerank \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"documents": [{"title": "Doc1", "url": "https://a.com"}]}'
+``` 

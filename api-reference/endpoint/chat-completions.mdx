@@ -1,0 +1,17 @@
+---
+title: 'Chat Completions'
+openapi: 'POST /chat/completions'
+---
+
+Generate chat completions with optional search augmentation.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/chat/completions \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4o-mini", "messages": [{"role": "user", "content": "Hello, who are you?"}]}'
+``` 

@@ -1,0 +1,17 @@
+---
+title: 'Extract'
+openapi: 'POST /extract'
+---
+
+Extract and parse content from a URL.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/extract \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://openai.com"}'
+``` 

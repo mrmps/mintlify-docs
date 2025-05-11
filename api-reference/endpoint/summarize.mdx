@@ -1,0 +1,17 @@
+---
+title: 'Summarize'
+openapi: 'POST /summarize'
+---
+
+Generate a summary of a document.
+
+<ParamFields />
+
+## Example Request
+
+```bash
+curl -X POST https://api.agentserp.com/summarize \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://openai.com"}'
+``` 
