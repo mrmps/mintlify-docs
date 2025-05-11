@@ -28,7 +28,7 @@
               "essentials/making-requests",
               "essentials/responses",
               "essentials/errors",
-              "essentials/reusable-snippets"
+              "essentials/authentication",
             ]
           }
         ]
