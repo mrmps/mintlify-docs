@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.agentserp.com"
+      "url": "https://5c75-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app"
     }
   ],
   "security": [
