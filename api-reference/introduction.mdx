@@ -14,26 +14,50 @@ This API allows you to search, extract, summarize, rerank, classify, and chat wi
   This documentation is generated from our OpenAPI spec and kept up to date with the latest changes.
 </Note>
 
-## Welcome
+## Available Endpoints
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+AgentSerp provides a comprehensive suite of AI-powered endpoints:
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Search"
+  icon="magnifying-glass"
+  href="/api-reference/endpoint/search"
 >
-  View the OpenAPI specification file
+  Search for information with various retrieval strategies
+</Card>
+
+<Card
+  title="Bulk Extract"
+  icon="file-export"
+  href="/api-reference/endpoint/bulk-extract"
+>
+  Extract content from multiple URLs in bulk
+</Card>
+
+<Card
+  title="Chat Completions"
+  icon="message-bot"
+  href="/api-reference/endpoint/chat-completions"
+>
+  Generate chat completions with optional search augmentation
+</Card>
+
+<Card
+  title="Classify"
+  icon="tag"
+  href="/api-reference/endpoint/classify"
+>
+  Classify texts into predefined labels
+</Card>
+
+<Card
+  title="Similar"
+  icon="objects-column"
+  href="/api-reference/endpoint/similar"
+>
+  Find documents similar to a given URL
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+All API endpoints are authenticated using Bearer tokens. Include your API token in the Authorization header of each request.
