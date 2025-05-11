@@ -13,7 +13,7 @@
   ],
   "components": {
     "schemas": {
-      "SearchRequest":  {
+      "SearchRequest": {
         "type": "object",
         "properties": {
           "query": {
