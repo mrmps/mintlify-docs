@@ -9,9 +9,9 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Documentation",
+        "group": "Documentation",
         "pages": [
           "api-reference/introduction",
           "quickstart",
@@ -19,21 +19,27 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "group": "API Reference",
         "pages": [
           "api-reference/endpoint/search",
           "api-reference/endpoint/chat-completions"
         ]
-      },
-      {
-        "tab": "Community",
-        "href": "https://agentserp.com/community"
-      },
-      {
-        "tab": "Blog",
-        "href": "https://agentserp.com/blog"
       }
-    ]
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Community",
+          "href": "https://agentserp.com/community",
+          "icon": "slack"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://agentserp.com/blog",
+          "icon": "newspaper"
+        }
+      ]
+    }
   },
   "logo": {
     "light": "/logo/light.svg",
