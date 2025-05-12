@@ -34,7 +34,6 @@
       },
       {
         "tab": "API Reference",
-        "openapi": "https://906e-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/doc",
         "groups": [
           {
             "group": "API Documentation",
@@ -44,10 +43,10 @@
           },
           {
             "group": "Endpoints",
-            "pages": [
-              "api-reference/endpoint/search",
-              "api-reference/endpoint/chat-completions"
-            ]
+            "openapi": {
+              "source": "/api-reference/openapi.json",
+              "directory": "api-reference"
+            }
           }
         ]
       }
