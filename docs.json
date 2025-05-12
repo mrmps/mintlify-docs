@@ -9,10 +9,9 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "anchors": [
+    "tabs": [
       {
-        "anchor": "Documentation",
-        "icon": "book-open-cover",
+        "tab": "Documentation",
         "pages": [
           "api-reference/introduction",
           "quickstart",
@@ -20,22 +19,19 @@
         ]
       },
       {
-        "anchor": "API Reference",
-        "icon": "square-terminal",
+        "tab": "API Reference",
         "pages": [
           "api-reference/endpoint/search",
           "api-reference/endpoint/chat-completions"
         ]
       },
       {
-        "anchor": "Community",
-        "href": "https://agentserp.com/community",
-        "icon": "slack"
+        "tab": "Community",
+        "href": "https://agentserp.com/community"
       },
       {
-        "anchor": "Blog",
-        "href": "https://agentserp.com/blog",
-        "icon": "newspaper"
+        "tab": "Blog",
+        "href": "https://agentserp.com/blog"
       }
     ]
   },
