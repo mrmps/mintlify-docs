@@ -9,45 +9,35 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "anchors": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "api-reference/introduction",
-              "quickstart"
-            ]
-          },
-          {
-            "group": "API Reference",
-            "openapi": {
-              "source": "https://906e-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/doc"
-            }
-          }
+        "anchor": "Documentation",
+        "icon": "book-open-cover",
+        "pages": [
+          "api-reference/introduction",
+          "quickstart",
+          "development"
         ]
+      },
+      {
+        "anchor": "API Reference",
+        "icon": "square-terminal",
+        "pages": [
+          "api-reference/endpoint/search",
+          "api-reference/endpoint/chat-completions"
+        ]
+      },
+      {
+        "anchor": "Community",
+        "href": "https://agentserp.com/community",
+        "icon": "slack"
+      },
+      {
+        "anchor": "Blog",
+        "href": "https://agentserp.com/blog",
+        "icon": "newspaper"
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://agentserp.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://agentserp.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://agentserp.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
