@@ -1,37 +1,30 @@
 ---
 title: 'Introduction'
-description: 'API for search, extraction, summarization, and AI-powered text generation'
+description: 'API for search and AI-powered text generation'
 ---
 
 Welcome to the AgentSerp API documentation!
 
-This API allows you to search, extract, summarize, rerank, classify, and chat with AI-powered endpoints.
+This API provides powerful search capabilities and AI-powered chat completions to enhance your applications.
 
 - All endpoints require Bearer authentication.
+- Responses include metadata with version, processing time, and cost information.
 - See each endpoint page for request/response details and examples.
 
 <Note>
-  This documentation is generated from our OpenAPI spec and kept up to date with the latest changes.
+  This documentation is based on our OpenAPI spec and kept up to date with the latest changes.
 </Note>
 
 ## Available Endpoints
 
-AgentSerp provides a comprehensive suite of AI-powered endpoints:
+AgentSerp currently offers these core endpoints:
 
 <Card
   title="Search"
   icon="magnifying-glass"
   href="/api-reference/endpoint/search"
 >
-  Search for information with various retrieval strategies
-</Card>
-
-<Card
-  title="Bulk Extract"
-  icon="file-export"
-  href="/api-reference/endpoint/bulk-extract"
->
-  Extract content from multiple URLs in bulk
+  Search for information with various retrieval strategies including keyword, neural, and topic-specific search
 </Card>
 
 <Card
@@ -39,25 +32,9 @@ AgentSerp provides a comprehensive suite of AI-powered endpoints:
   icon="message-bot"
   href="/api-reference/endpoint/chat-completions"
 >
-  Generate chat completions with optional search augmentation
+  Generate chat completions with optional search augmentation for real-time information
 </Card>
 
-<Card
-  title="Classify"
-  icon="tag"
-  href="/api-reference/endpoint/classify"
->
-  Classify texts into predefined labels
-</Card>
+## Response Format
 
-<Card
-  title="Similar"
-  icon="objects-column"
-  href="/api-reference/endpoint/similar"
->
-  Find documents similar to a given URL
-</Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens. Include your API token in the Authorization header of each request.
+All API responses follow a consistent envelope format:
