@@ -24,7 +24,6 @@
             "group": "API Reference",
             "openapi": {
               "source": "https://906e-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/doc",
-              "directory": "api-reference"
             }
           }
         ]
