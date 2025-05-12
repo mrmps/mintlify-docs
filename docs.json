@@ -11,38 +11,17 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Getting Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "api-reference/introduction",
+              "quickstart"
             ]
           },
           {
-            "group": "Essentials",
-            "pages": [
-              "essentials/authentication",
-              "essentials/making-requests",
-              "essentials/responses",
-              "essentials/errors"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoints",
+            "group": "API Reference",
             "openapi": {
               "source": "https://906e-2001-5a8-6cc-e000-55c0-f0b-9da7-10b0.ngrok-free.app/doc",
               "directory": "api-reference"
